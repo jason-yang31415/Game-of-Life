@@ -4,13 +4,18 @@ var ctx;
 var canvasWidth;
 var canvasHeight;
 
+var backgroundColor = "#FFFFFF";
+var unshadedColor = "#B0B0B0";
+var shadedColor = "#808080";
+
 //backend vars
 var grid;
 
-function Cell(x, y){
+function Cell(x, y, grid){
     
     this.x = x;
     this.y = y;
+    this.grid = grid;
 
     this.shaded = false;
 
@@ -26,11 +31,27 @@ function Cell(x, y){
         return this.shaded;
     }
 
+    this.draw = function(ctx){
+        if (this.getShaded())
+            ctx.fillStyle = shadedColor;
+        else
+            ctx.fillStyle = unshadedColor;
+        
+        var tlx = (grid.cellWidth + grid.cellMargin) * this.x;
+        var tly = (grid.cellHeight + grid.cellMargin) * this.y;
+        ctx.fillRect(tlx, tly, grid.cellWidth, grid.cellHeight);
+    }
+
 }
 
 function Grid(width, height){
+
     this.width = width;
     this.height = height;
+
+    this.cellWidth;
+    this.cellHeight;
+    this.cellMargin = 1;
 
     this.grid = new Array();
 
@@ -46,14 +67,18 @@ function Grid(width, height){
        for (var i = 0; i < this.width; i++){
           grid[i] = new Array();
           for (var j = 0; j < this.height; j++){
-              grid[i][j] = new Cell(i, j);
+              grid[i][j] = new Cell(i, j, this);
           }
        }
+
+       this.cellWidth = canvasWidth / this.width - this.cellMargin;
+       this.cellHeight = canvasHeight / this.height - this.cellMargin;
     }
 
     this.getCell = function(x, y){
         return grid[x][y];
     }
+
 }
 
 function init(){
@@ -62,27 +87,24 @@ function init(){
     grid.initGrid();
 
     step();
+    setInterval(step, 33);
 }
 
 function initCanvas(){
     var c = document.getElementById("canvas");
-    canvasWidth = c.width;
-    canvasHeight = c.height;
 
     ctx = c.getContext("2d");
+    canvasWidth = ctx.canvas.width;
+    canvasHeight = ctx.canvas.height;
 }
 
 function step(){
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-    ctx.fillStyle = "#000000";
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    
     for (var i = 0; i < grid.getWidth(); i++){
         for (var j = 0; j < grid.getHeight(); j++){
-            alert("cell");
-            if (!grid.getCell(i, j).getShaded()){
-                ctx.fillRect(10 * i, 10 * j, 10 * i + 10, 10 * j + 10);
-            }
+            grid.getCell(i, j).draw(ctx);
         }
     }
 }
