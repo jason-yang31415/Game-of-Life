@@ -7,7 +7,13 @@
     <body>
         <script src="life.js"></script>
 
-        <button onclick="init()">Start!</button>
         <canvas id="canvas" width="1000" height = "1000"></canvas>
+
+        <div id="content">
+            <button id="startButton" onclick="init()">Start!</button>
+            <button id="stepButton" onclick="step()">Step</button>
+            <button id="runButton" onclick="run()">Run</button>
+            <button id="stopButton" onclick="stop()">Stop</button>
+        </div>
     </body>
 </html>

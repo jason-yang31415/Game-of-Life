@@ -1,5 +1,15 @@
+body {
+    margin: 0;
+}
+
 #canvas {
-    width: 100vw;
+    width: 100vh;
     height: 100vh;
     background: white;
+}
+
+#content {
+    position: absolute;
+    top: 0;
+    left: 100vh;
 }
