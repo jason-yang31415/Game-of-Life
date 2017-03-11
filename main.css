@@ -1,3 +1,12 @@
+* {
+	font-size: 16px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h1 {
+	font-size: 24px;
+}
+
 body {
     margin: 0;
 }
@@ -12,4 +21,27 @@ body {
     position: absolute;
     top: 0;
     left: 100vh;
+	right: 0;
+	padding: 20px 20px 10px 20px;
+}
+
+#content * {
+	margin-bottom: 10px;
+}
+
+#stepCounter {
+	display: inline;
+}
+
+
+
+.numBox {
+    width: 3em;
+}
+
+.settingsBox {
+    display: block;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #e5e5e5;
 }

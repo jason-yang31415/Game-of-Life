@@ -1,19 +1,51 @@
 <!doctype html>
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="main.css" />
-        <title>Game of Life HSCTF 2017</title>
-    </head>
-    <body>
-        <script src="life.js"></script>
 
-        <canvas id="canvas" width="1000" height = "1000"></canvas>
+<head>
+	<link rel="stylesheet" type="text/css" href="main.css" />
+	<title>Game of Life HSCTF 2017</title>
+</head>
 
-        <div id="content">
-            <button id="startButton" onclick="init()">Start!</button>
-            <button id="stepButton" onclick="step()">Step</button>
-            <button id="runButton" onclick="run()">Run</button>
-            <button id="stopButton" onclick="stop()">Stop</button>
-        </div>
-    </body>
+<body>
+	<script src="life.js"></script>
+
+	<canvas id="canvas" width="1000" height="1000"></canvas>
+
+	<div id="content">
+		<div class="settingsBox">
+			<h1>Grid</h1>
+			<input type="number" class="numBox" value="1" id="widthBox">
+			 cells x
+			<input type="number" class="numBox" value="1" id="heightBox" />
+			 cells
+			<br />
+			<button id="startButton" onclick="init()">Start!</button>
+		</div>
+
+		<div class="settingsBox">
+			<h1>Edit</h1>
+			<button id="clearButton" onclick="clearGrid()">Clear</button>
+		</div>
+
+		<div class="settingsBox">
+			<h1>Run</h1>
+			<button id="stepButton" onclick="step()">Step</button>
+			<br />
+			<button id="runButton" onclick="run()">Run</button>
+			<button id="stopButton" onclick="stop()">Stop</button>
+			<button id="resetButton" onclick="reset()">Reset</button>
+			<br />
+			<input type="number" class="numBox" value="2" id="runSpeed"> steps/second
+			<br />
+			Count: <p id="stepCounter">0</p>
+		</div>
+
+		<div class="settingsBox">
+			<h1>I/O</h1>
+			<a href="" id="save"><button id="saveButton" onclick="save()">Save</button></a>
+			<input type="file" id="loadButton" onchange="load(this.files)" />
+		</div>
+	</div>
+</body>
+
 </html>
